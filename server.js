@@ -43,6 +43,10 @@ server.get('/data/weather',(request,response) => {
 
 server.use(cors());
 
+
+
+
+
 server.get('*',(request,response)=>{
     response.status.send('NOT FOUND');
 
