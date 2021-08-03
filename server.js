@@ -1,12 +1,14 @@
 //'use strict'
-const { request, response } = require('express');
+
 const express = require('express');
 const server =express();
 const cors=require('cors');
-
+require('dotenv').config;
 const weather= require('./data/weather.json');
 
-const PORT = 3001;
+const PORT =3001;
+// const PORT = process.env.PORT;
+server.use(cors());
 
 // URl=http://localhost:3001/data/weather
 
@@ -30,25 +32,20 @@ server.get('/data/weather',(request,response) => {
      return item;
     });
       
-    let sendArr=[weatherOfcity.city_name,weatherOfcity.lat,weatherOfcity.lon];
-    
-    response.send(sendArr);
-    
 
-    // response.send(weatherOfcity.city_name,);
-    // response.send(weatherOfcity.lat);
-    // response.send(weatherOfcity.lon);
+ response.send(weatherOfcity);
+   
 });
 
 
-server.use(cors());
+
 
 
 
 
 
 server.get('*',(request,response)=>{
-    response.status.send('NOT FOUND');
+    response.status(500).send('Something went wrong');
 
 });
 
